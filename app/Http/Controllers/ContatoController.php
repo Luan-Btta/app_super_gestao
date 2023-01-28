@@ -39,13 +39,15 @@ class ContatoController extends Controller
         //AS CHAVES SÃO OS NAMES DOS INPUTS
 
         $request->validate([
-            'nome' => 'required|min:3|max:40', //NOMES COM MÍNIMO 3 CARACTERES E MÁXIMO 40
+            //VALIDAÇÃO UNIQUE: PARÂMENTRO DEVE CONTER NOME DA TABELA NO BANCO COM O CHAVE/NAME
+            'nome' => 'required|min:3|max:40|unique:site_contatos', //NOMES COM MÍNIMO 3 CARACTERES E MÁXIMO 40
             'telefone' => 'required',
             'email' => 'email',
-            'motivo_contato' => 'required',
+            'motivo_contatos_id' => 'required',
             'mensagem' => 'required',
         ]);
 
-        //SiteContato::create($request->all());
+        SiteContato::create($request->all());
+        return redirect()->route('site.index');
     }
 }
