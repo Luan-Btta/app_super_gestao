@@ -3,11 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
-use App\Models\LogAcesso;
 
-class LogAcessoMiddleware
+class AutenticacaoMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,15 +16,11 @@ class LogAcessoMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // $request - Manipular
-        
-
-        $ip = $request->server->get('REMOTE_ADDR');
-        $rota = $request->getRequestUri();
-        LogAcesso::create(['log' => "IP $ip requisitou a rota $rota"]);
-
-        return $next($request);
-        //Response - Manipular
-        //return Response('Chegamos no middleware e finalizamos no próprio middleware');
+        //VERIFICA SE O USUÁRIO POSSUI ACESSO A ROTA
+        if(true){
+            return $next($request);
+        }else{
+            return Response('Acesso negado! Rota exige autenticação!');
+        }        
     }
 }

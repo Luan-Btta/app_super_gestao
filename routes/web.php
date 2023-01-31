@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AutenticacaoMiddleware;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //middleware(LogAcessoMiddleware::class)->
-Route::get('/', 'App\Http\Controllers\PrincipalController@principal')->name('site.index')->middleware('log.acesso');
+Route::get('/', 'App\Http\Controllers\PrincipalController@principal')->name('site.index');
 
 Route::get('/sobrenos', 'App\Http\Controllers\SobreNosController@sobreNos')->name('site.sobrenos');
 
@@ -27,7 +28,8 @@ Route::post('/contato', 'App\Http\Controllers\ContatoController@salvar')->name('
 
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
-Route::prefix('/app')->group(function() {
+//middleware('log.acesso', 'autenticacao')->
+Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
 
     Route::get('/fornecedores', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedores');
