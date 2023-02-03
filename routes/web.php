@@ -26,10 +26,13 @@ Route::get('/contato', 'App\Http\Controllers\ContatoController@contato')->name('
 
 Route::post('/contato', 'App\Http\Controllers\ContatoController@salvar')->name('site.contato');
 
-Route::get('/login', function(){return 'Login';})->name('site.login');
+Route::get('/login', 'App\Http\Controllers\LoginController@index')->name('site.login');
+Route::post('/login', 'App\Http\Controllers\LoginController@autenticar')->name('site.login');
+
 
 //middleware('log.acesso', 'autenticacao')->
-Route::middleware('autenticacao')->prefix('/app')->group(function() {
+//Route::middleware('autenticacao:ldap, colaborador')->prefix('/app')->group(function() {
+Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function() {
     Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
 
     Route::get('/fornecedores', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedores');

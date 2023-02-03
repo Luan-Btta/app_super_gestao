@@ -14,13 +14,25 @@ class AutenticacaoMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $metodo_autenticacao, $perfil)
     {
+        if($metodo_autenticacao == 'padrao'){
+            echo 'Verificar o usuário e senha no banco de dados - '.$perfil.'<br>';
+        }else if($metodo_autenticacao== 'ldap'){
+            echo 'Verificar o usuário e senha no AD - '.$perfil.'<br>';
+        }
+
+        if($perfil == 'visitante'){
+            echo 'Exibir apenas alguns recursos<br>';
+        }else{
+            echo 'Carregar perfil no BD<br>';
+        }
+
         //VERIFICA SE O USUÁRIO POSSUI ACESSO A ROTA
-        if(true){
+        if(false){
             return $next($request);
         }else{
-            return Response('Acesso negado! Rota exige autenticação!');
+            return Response('Acesso negado! Rota exige autenticação!<br>');
         }        
     }
 }
