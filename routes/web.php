@@ -33,11 +33,15 @@ Route::post('/login', 'App\Http\Controllers\LoginController@autenticar')->name('
 //middleware('log.acesso', 'autenticacao')->
 //Route::middleware('autenticacao:ldap, colaborador')->prefix('/app')->group(function() {
 Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function() {
-    Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
+    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('app.home');
 
-    Route::get('/fornecedores', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedores');
+    Route::get('/sair', 'App\Http\Controllers\LoginController@sair')->name('app.sair');
+    
+    Route::get('/cliente', 'App\Http\Controllers\ClienteController@index')->name('app.cliente');
 
-    Route::get('/produtos', function(){return 'Produtos';})->name('app.produtos');
+    Route::get('/fornecedor', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
+
+    Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
 });
 
 Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste')->name('teste');
