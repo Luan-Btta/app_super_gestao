@@ -10,7 +10,8 @@
         @component('app.layouts._components.menu')
         @endcomponent
         <div class="informacao-pagina">
-            @component('app.layouts._components.form_fornecedor', ['button' => 'Cadastrar', 'classe' => 'borda-preta'])
+            {{ isset($msg) && $msg != '' ? $msg : '' }}
+            @component('app.layouts._components.form_fornecedor', ['button' => 'Cadastrar', 'classe' => 'borda-preta', 'metodo' => 'app.fornecedor.adicionar'])
             @endcomponent
         </div>
     </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
+use App\Models\Fornecedor;
 
 class FornecedorController extends Controller
 {
@@ -14,8 +16,35 @@ class FornecedorController extends Controller
         return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta']);
     }
 
-    public function adicionar(){
-        return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta']);
+    public function adicionar(Request $request){
+        $msg = '';
+        
+        if($request->input('_token') != ''){
+            $regras = [
+                'nome' => 'required|min:3|max:40',
+                'site' => 'required',
+                'uf' => 'required|min:2|max:2',
+                'email' => 'email'
+            ];
+
+            $feedback = [
+                'required' => 'O campo :attribute é obrigatório',
+                'nome.min' => 'O campo :attribute precisa ter 3 caracteres ou mais',
+                'nome.max' => 'O campo :attribute tem limite de 40 caracteres',
+                'uf' => 'O campo :attribute deve ter 2 caracteres',
+                'email' => 'Favor inserir um :attribute válido'
+            ];
+
+            $request->validate($regras, $feedback);
+
+            $fornecedor = new Fornecedor();
+            $fornecedor->create($request->all());
+
+            $msg = 'Fornecedor cadastrado com sucesso';
+
+        };
+
+        return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta', 'msg' => $msg]);
     }
 
     /*
