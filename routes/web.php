@@ -39,7 +39,12 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
     
     Route::get('/cliente', 'App\Http\Controllers\ClienteController@index')->name('app.cliente');
 
+
     Route::get('/fornecedor', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
+    Route::post('/fornecedor/listar', 'App\Http\Controllers\FornecedorController@listar')->name('app.fornecedor.listar');
+    Route::get('/fornecedor/adicionar', 'App\Http\Controllers\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+
+
 
     Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
 });

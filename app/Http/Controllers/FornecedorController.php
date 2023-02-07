@@ -10,6 +10,14 @@ class FornecedorController extends Controller
         return view('app.fornecedor.index', ['titulo' => 'Fornecedor', 'classe' => 'borda-preta']);
     }
 
+    public function listar(){
+        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta']);
+    }
+
+    public function adicionar(){
+        return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta']);
+    }
+
     /*
     public function index(){
         $fornecedores = [

@@ -8,10 +8,9 @@
             <p>{{ $titulo }}</p>
         </div>
         @component('app.layouts._components.menu')
-            
         @endcomponent
         <div class="informacao-pagina">
-            @component('app.layouts._components.form_fornecedor', ['button' => 'Pesquisar', 'classe' => 'borda-preta'])
+            @component('app.layouts._components.form_fornecedor', ['button' => 'Cadastrar', 'classe' => 'borda-preta'])
             @endcomponent
         </div>
     </div>
