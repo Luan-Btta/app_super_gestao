@@ -12,7 +12,11 @@ class FornecedorController extends Controller
         return view('app.fornecedor.index', ['titulo' => 'Fornecedor', 'classe' => 'borda-preta']);
     }
 
-    public function listar(){
+    public function listar(Request $request){
+        $fornecedor = Fornecedor::where('nome', 'like', '%' . $request->get('nome') . '%')->OrWhere('site', $request->get('site'))->OrWhere('uf', $request->get('uf'))->OrWhere('email', $request->get('email'))->get()->toArray();
+
+        dd($fornecedor);
+        
         return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta']);
     }
 
