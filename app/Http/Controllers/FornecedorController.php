@@ -13,10 +13,15 @@ class FornecedorController extends Controller
     }
 
     public function listar(Request $request){
-        $fornecedores = Fornecedor::where('nome', 'like', '%' . $request->input('nome') . '%')->where('site', 'like', '%' . $request->input('site') . '%')
-            ->where('uf', 'like', '%' . $request->input('uf') . '%')
-            ->where('email', 'like', '%' . $request->input('email') . '%')->get();
         
+        $fornecedores = Fornecedor::
+            where('nome', 'like', '%' . $request->input('nome') . '%')      
+            ->where('site', 'like', '%' . $request->input('site') . '%')
+            ->where('uf', 'like', '%' . $request->input('uf') . '%')
+            ->where('email', 'like', '%' . $request->input('email') . '%');
+
+        dd($fornecedores);
+
         return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta', 'fornecedores' => $fornecedores]);
     }
 

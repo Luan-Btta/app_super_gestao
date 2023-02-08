@@ -7,7 +7,7 @@
         {{$errors->has('site') ? $errors->first('site') : ''}}
         <input type="text" name="uf" value="{{ old('uf') }}" placeholder="UF" class="{{ $classe }}">
         {{$errors->has('uf') ? $errors->first('uf') : ''}}
-        <input type="email" name="email" value="{{ old('email') }}" placeholder="Email" class="{{ $classe }}">
+        <input type="{{ $tipo }}" name="email" value="{{ old('email') }}" placeholder="Email" class="{{ $classe }}">
         {{$errors->has('email') ? $errors->first('email') : ''}}
         <button type="submit">{{ $button }}</button>
     </form>

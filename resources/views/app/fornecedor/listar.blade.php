@@ -15,7 +15,7 @@
         </div>
         <div class="informacao-pagina">
             <div style="width: 90%; margin: 50px auto 0 auto">
-                <table class="tabela-forn">
+                <table>
                     <thead>
                         <tr>
                             <th>Nome / Razão Social</th>

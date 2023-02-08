@@ -11,7 +11,7 @@
             
         @endcomponent
         <div class="informacao-pagina">
-            @component('app.layouts._components.form_fornecedor', ['button' => 'Pesquisar', 'classe' => 'borda-preta', 'metodo' => 'app.fornecedor.listar'])
+            @component('app.layouts._components.form_fornecedor', ['button' => 'Pesquisar', 'classe' => 'borda-preta', 'metodo' => 'app.fornecedor.listar', 'tipo' => 'text'])
             @endcomponent
         </div>
     </div>

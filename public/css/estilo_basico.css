@@ -195,11 +195,11 @@ button:hover {
     margin: 0px 15px 0px 15px;
 }
 
-.tabela-forn {
+table {
     margin: 50px auto 0 auto;
 }
 
-.tabela-forn, th, td {
+th, td {
     border-bottom: 2px solid;
     padding: 10px;
 }
