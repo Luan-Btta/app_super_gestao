@@ -12,7 +12,7 @@ class FornecedorController extends Controller
         return view('app.fornecedor.index', ['titulo' => 'Fornecedor', 'classe' => 'borda-preta']);
     }
 
-    public function listar(Request $request){
+    public function listar(Request $request, $msg = ''){
         
         $fornecedores = Fornecedor::
             where('nome', 'like', '%' . $request->input('nome') . '%')      
@@ -22,7 +22,7 @@ class FornecedorController extends Controller
 
         //dd($fornecedores);
 
-        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta', 'fornecedores' => $fornecedores]);
+        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta', 'fornecedores' => $fornecedores, 'msg' => $msg]);
     }
 
     public function adicionar(Request $request){
@@ -47,18 +47,56 @@ class FornecedorController extends Controller
             $request->validate($regras, $feedback);
 
             $fornecedor = new Fornecedor();
-            $fornecedor->create($request->all());
 
-            $msg = 'Fornecedor cadastrado com sucesso';
+            if($request->input('id') == ''){
+                $fornecedor->create($request->all());
+
+                $msg = 'Fornecedor cadastrado com sucesso';
+            }else{
+                $fornecedor = $fornecedor->find($request->input('id'));
+                
+                $update = $fornecedor->update($request->all());
+
+                if($update){
+                    $msg = 'Fornecedor atualizado com sucesso';
+                    return $this->listar($request, $msg);
+                }else{
+                    $msg = 'Falha ao atualizar os dados, tente novamente';
+                }
+
+                return $this->listar($request, $msg);
+                
+            }
+
 
         };
 
-        return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta', 'msg' => $msg]);
+        $fornecedor = '';
+
+        return view('app.fornecedor.adicionar', ['button' => 'Cadastrar', 'titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta', 'msg' => $msg, 'fornecedor' => $fornecedor]);
     }
 
     public function editar($id){
-        echo "Editar ID = $id";
+        $fornecedor = Fornecedor::find($id);
+
+        return view('app.fornecedor.adicionar', ['button' => 'Atualizar', 'titulo' => 'Fornecedor - Editar', 'classe' => 'borda-preta', 'fornecedor' => $fornecedor]);
     }
+
+    public function excluir($id, request $request){
+        $fornecedor = Fornecedor::find($id);
+        //dd($fornecedor);
+
+        $delete = $fornecedor->delete();
+
+        if ($delete) {
+            $msg = 'Fornecedor removido com sucesso';
+        } else {
+            $msg = 'Falha ao remover os dados, tente novamente';
+        }
+
+        return $this->listar($request, $msg);
+    }
+
 
     /*
     public function index(){
