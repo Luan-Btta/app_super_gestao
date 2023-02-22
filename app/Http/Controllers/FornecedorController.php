@@ -18,9 +18,9 @@ class FornecedorController extends Controller
             where('nome', 'like', '%' . $request->input('nome') . '%')      
             ->where('site', 'like', '%' . $request->input('site') . '%')
             ->where('uf', 'like', '%' . $request->input('uf') . '%')
-            ->where('email', 'like', '%' . $request->input('email') . '%');
+            ->where('email', 'like', '%' . $request->input('email') . '%')->get();
 
-        dd($fornecedores);
+        //dd($fornecedores);
 
         return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta', 'fornecedores' => $fornecedores]);
     }
@@ -54,6 +54,10 @@ class FornecedorController extends Controller
         };
 
         return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta', 'msg' => $msg]);
+    }
+
+    public function editar($id){
+        echo "Editar ID = $id";
     }
 
     /*
