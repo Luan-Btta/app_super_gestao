@@ -41,7 +41,15 @@
                     </tbody>
                 </table>
                 <div class="pagination">
-                    {{ $fornecedores->links() }}
+                    {{ $fornecedores->appends($request)->links() }}
+                    <br>
+                    {{ $fornecedores->count() }} - Total de registros por página
+                    <br>
+                    {{ $fornecedores->total() }} - Total de registros da consulta
+                    <br>
+                    {{ $fornecedores->firstItem() }} - Nímero do primeiro registro da página
+                    <br>
+                    {{ $fornecedores->lastItem() }} - Nímero do ultimo registro da página
                 </div>
             </div>
         </div>

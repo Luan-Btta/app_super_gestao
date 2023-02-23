@@ -18,11 +18,11 @@ class FornecedorController extends Controller
             where('nome', 'like', '%' . $request->input('nome') . '%')      
             ->where('site', 'like', '%' . $request->input('site') . '%')
             ->where('uf', 'like', '%' . $request->input('uf') . '%')
-            ->where('email', 'like', '%' . $request->input('email') . '%')->paginate(2);
+            ->where('email', 'like', '%' . $request->input('email') . '%')->paginate(3); //->simplePaginate(3);
 
         //dd($fornecedores);
 
-        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta', 'fornecedores' => $fornecedores, 'msg' => $msg]);
+        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'classe' => 'borda-preta', 'fornecedores' => $fornecedores, 'msg' => $msg, 'request' => $request->all()]);
     }
 
     public function adicionar(Request $request){
@@ -86,7 +86,8 @@ class FornecedorController extends Controller
         //dd($fornecedor);
 
         if ($fornecedor) {
-            $delete = $fornecedor->delete();
+            $fornecedor->delete();
+            //$fornecedor->forceDelete();
             $msg = 'Fornecedor removido com sucesso';
         } else {
             $msg = 'Falha ao remover registro, tente novamente';
