@@ -18,7 +18,7 @@ class FornecedorController extends Controller
             where('nome', 'like', '%' . $request->input('nome') . '%')      
             ->where('site', 'like', '%' . $request->input('site') . '%')
             ->where('uf', 'like', '%' . $request->input('uf') . '%')
-            ->where('email', 'like', '%' . $request->input('email') . '%')->get();
+            ->where('email', 'like', '%' . $request->input('email') . '%')->paginate(2);
 
         //dd($fornecedores);
 
@@ -89,7 +89,7 @@ class FornecedorController extends Controller
             $delete = $fornecedor->delete();
             $msg = 'Fornecedor removido com sucesso';
         } else {
-            $msg = 'Falha ao remover os dados, tente novamente';
+            $msg = 'Falha ao remover registro, tente novamente';
         }
 
         return $this->listar($request, $msg);

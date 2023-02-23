@@ -203,3 +203,27 @@ th, td {
     border-bottom: 2px solid;
     padding: 10px;
 }
+
+.pagination nav, .pagination span {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination path, .pagination svg{
+    display: none;
+}
+
+.pagination a {
+    margin: 0px 5px;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+.pagination .cursor-default {
+    font-weight: bold;
+    text-decoration: underline;
+}
