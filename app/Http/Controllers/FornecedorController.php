@@ -59,7 +59,7 @@ class FornecedorController extends Controller
 
                 if($update){
                     $msg = 'Fornecedor atualizado com sucesso';
-                    return $this->listar($request, $msg);
+                    return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
                 }else{
                     $msg = 'Falha ao atualizar os dados, tente novamente';
                 }
@@ -68,7 +68,6 @@ class FornecedorController extends Controller
                 
             }
 
-
         };
 
         $fornecedor = '';
@@ -76,19 +75,18 @@ class FornecedorController extends Controller
         return view('app.fornecedor.adicionar', ['button' => 'Cadastrar', 'titulo' => 'Fornecedor - Adicionar', 'classe' => 'borda-preta', 'msg' => $msg, 'fornecedor' => $fornecedor]);
     }
 
-    public function editar($id){
+    public function editar($id, $msg = ''){
         $fornecedor = Fornecedor::find($id);
 
-        return view('app.fornecedor.adicionar', ['button' => 'Atualizar', 'titulo' => 'Fornecedor - Editar', 'classe' => 'borda-preta', 'fornecedor' => $fornecedor]);
+        return view('app.fornecedor.adicionar', ['button' => 'Atualizar', 'titulo' => 'Fornecedor - Editar', 'classe' => 'borda-preta', 'fornecedor' => $fornecedor, 'msg' => $msg]);
     }
 
     public function excluir($id, request $request){
         $fornecedor = Fornecedor::find($id);
         //dd($fornecedor);
 
-        $delete = $fornecedor->delete();
-
-        if ($delete) {
+        if ($fornecedor) {
+            $delete = $fornecedor->delete();
             $msg = 'Fornecedor removido com sucesso';
         } else {
             $msg = 'Falha ao remover os dados, tente novamente';
