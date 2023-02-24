@@ -48,8 +48,12 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
     Route::get('/fornecedor/editar/{id}/{msg?}', 'App\Http\Controllers\FornecedorController@editar')->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}', 'App\Http\Controllers\FornecedorController@excluir')->name('app.fornecedor.excluir');
 
-    
+    //PRODUTOS
+    Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+    /*
     Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
+    Route::get('/produto/create', 'App\Http\Controllers\ProdutoController@create')->name('app.produto.create');
+    */
 });
 
 Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste')->name('teste');

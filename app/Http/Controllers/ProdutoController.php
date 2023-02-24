@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Ramsey\Collection\Collection;
+use App\Models\Unidade;
 
 class ProdutoController extends Controller
 {
@@ -12,10 +14,14 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $msg = '')
     {
         //
-        return view('app.produto', ['titulo' => 'Produto']);
+        $produtos = Produto::simplePaginate(10);
+
+        //dd($produtos);
+
+        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request, 'titulo' => 'Produtos - Listar']);
     }
 
     /**
@@ -25,7 +31,10 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $unidades = Unidade::all();
+        //dd($unidades);
+
+        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'classe' => 'borda-preta', 'button' => 'Adicionar', 'unidades' => $unidades]);
     }
 
     /**
