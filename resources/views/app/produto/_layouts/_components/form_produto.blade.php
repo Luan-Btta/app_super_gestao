@@ -1,5 +1,5 @@
 <div style="width: 30%; margin: 50px auto 0 auto">
-    <form action="{{ route('produto.create') }}" method="POST">
+    <form action="{{ route('produto.store') }}" method="POST">
         @csrf
         @if (isset($produto->id) && $produto->id != '')
             <input type="hidden" name="id" value="{{ $produto->id }}">
@@ -16,6 +16,7 @@
                 <option value="{{ $unidade->id }}" {{ isset($produto->unidade_id) && $produto->unidade_id === $unidade_id ? 'Selected' : '' }}>{{ $unidade->unidade }}</option>
             @endforeach
         </select>
+        {{$errors->has('unidade_id') ? $errors->first('unidade_id') : ''}}
         <button type="submit">{{ $button }}</button>
     </form>
 </div>
