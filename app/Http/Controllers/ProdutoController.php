@@ -18,10 +18,11 @@ class ProdutoController extends Controller
     {
         //
         $produtos = Produto::simplePaginate(10);
+        $unidades = Unidade::all();
 
         //dd($produtos);
 
-        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request, 'titulo' => 'Produtos - Listar']);
+        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request, 'titulo' => 'Produtos - Listar', 'unidades' => $unidades]);
     }
 
     /**
@@ -48,19 +49,21 @@ class ProdutoController extends Controller
         $regras = [
             'nome' => 'required|',
             'descricao' => 'required',
-            'peso' => 'required',
-            'unidade_id' => 'required'
+            'peso' => 'required|integer',
+            'unidade_id' => 'required|exists:unidades,id'
         ];
         $retornos = [
             'required' => 'O campo :attribute é obrigatório',
-            'unidade_id.required' => 'O campo unidade é obrigatorio'
+            'unidade_id.required' => 'O campo unidade é obrigatorio',
+            'integer' => 'O campo :attribute deve conter somente números',
+            'unidade_id.exists' => 'Unidade inválida'
         ];
         
         $request->validate($regras, $retornos);
 
         Produto::create($request->all());
 
-        redirect()->route('produto.index');
+        return redirect()->route('produto.index');
     }
 
     /**
@@ -71,7 +74,9 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        $unidades = Unidade::all();
+
+        return view('app.produto.show', ['titulo' => 'Produtos - Visualizar', 'produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**

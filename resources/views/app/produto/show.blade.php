@@ -20,31 +20,25 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Peso</th>
                             <th>UN</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($produtos as $produto)
-                            <tr>
-                                <td>{{ $produto->nome }}</td>
-                                <td>{{ $produto->descricao }}</td>
-                                <td>{{ $produto->peso }}KG</td>
-                                <td>
-                                    @foreach ($unidades as $unidade)
-                                        {{ $produto->unidade_id === $unidade->id ? $unidade->descricao : '' }}
-                                    @endforeach
-                                </td>
-                                <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
-                                <td><a href="">Excluir</a></td>
-                                <td><a href="">Editar</a></td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <td>{{ $produto->id }}</td>
+                            <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->descricao }}</td>
+                            <td>{{ $produto->peso }}KG</td>
+                            <td>
+                                @foreach ($unidades as $unidade)
+                                    {{ $produto->unidade_id === $unidade->id ? $unidade->descricao : '' }}
+                                @endforeach
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
