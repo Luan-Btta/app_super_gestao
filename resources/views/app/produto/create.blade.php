@@ -15,7 +15,7 @@
             </ul>
         </div>
         <div class="informacao-pagina">
-            @component('app.produto._layouts._components.form_produto', ['button' => $button, 'classe' => 'borda-preta', 'metodo' => 'produto.create', 'unidades' => $unidades])
+            @component('app.produto._layouts._components.form_produto', ['button' => $button, 'classe' => $classe, 'unidades' => $unidades, 'produto' => isset($produto) ? $produto : '', 'acao' => $acao])
             @endcomponent
         </div>
     </div>

@@ -22,7 +22,7 @@ class ProdutoController extends Controller
 
         //dd($produtos);
 
-        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request, 'titulo' => 'Produtos - Listar', 'unidades' => $unidades]);
+        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all(), 'titulo' => 'Produtos - Listar', 'unidades' => $unidades]);
     }
 
     /**
@@ -35,7 +35,7 @@ class ProdutoController extends Controller
         $unidades = Unidade::all();
         //dd($unidades);
 
-        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'classe' => 'borda-preta', 'button' => 'Adicionar', 'unidades' => $unidades]);
+        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => 'produto.store', 'button' => 'Cadastrar', 'classe' => 'borda-preta', 'unidades' => $unidades]);
     }
 
     /**
@@ -87,7 +87,10 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        $unidades = Unidade::all();
+        //dd($unidades);
+
+        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => "produto.update", 'button' => 'Atualizar', 'classe' => 'borda-preta', 'unidades' => $unidades, 'produto' => $produto, 'metodo' => 'PUT']);
     }
 
     /**
@@ -99,7 +102,24 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $regras = [
+            'nome' => 'required|',
+            'descricao' => 'required',
+            'peso' => 'required|integer',
+            'unidade_id' => 'required|exists:unidades,id'
+        ];
+        $retornos = [
+            'required' => 'O campo :attribute é obrigatório',
+            'unidade_id.required' => 'O campo unidade é obrigatorio',
+            'integer' => 'O campo :attribute deve conter somente números',
+            'unidade_id.exists' => 'Unidade inválida'
+        ];
+        
+        $request->validate($regras, $retornos);
+
+        $produto->update($request->all());
+
+        return redirect()->route('produto.index');
     }
 
     /**
