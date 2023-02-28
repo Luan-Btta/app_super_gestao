@@ -130,6 +130,9 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        $msg = 'Registro removido com sucesso';
+        return redirect()->route('produto.index', ['msg' => $msg]);
+        //dd($produto);
     }
 }
