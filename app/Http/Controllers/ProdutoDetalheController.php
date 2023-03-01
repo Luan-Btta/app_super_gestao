@@ -24,7 +24,7 @@ class ProdutoDetalheController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.produto_detalhe.create', ['titulo' => 'Adicionar Detalhes ao Produto','button' => 'Adicionar', 'classe' => 'borda-preta', 'acao' => 'produto-detalhe.store']);
     }
 
     /**
