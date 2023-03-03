@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProdutoDetalhe;
 use Illuminate\Http\Request;
+use App\Models\Produto;
+use App\Models\Unidade;
 
 class ProdutoDetalheController extends Controller
 {
@@ -24,7 +26,11 @@ class ProdutoDetalheController extends Controller
      */
     public function create()
     {
-        return view('app.produto_detalhe.create', ['titulo' => 'Adicionar Detalhes ao Produto','button' => 'Adicionar', 'classe' => 'borda-preta', 'acao' => 'produto-detalhe.store']);
+        $produtos = Produto::orderBy('nome')->get();
+        $unidades = Unidade::all();
+
+
+        return view('app.produto_detalhe.create', ['titulo' => 'Adicionar Detalhes ao Produto','button' => 'Adicionar', 'classe' => 'borda-preta', 'acao' => 'produto-detalhe.store', 'produtos' => $produtos, 'unidades' => $unidades]);
     }
 
     /**
