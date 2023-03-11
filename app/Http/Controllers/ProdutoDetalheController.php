@@ -63,7 +63,10 @@ class ProdutoDetalheController extends Controller
      */
     public function edit(ProdutoDetalhe $produtoDetalhe)
     {
-        //
+        $produtos = Produto::orderBy('nome')->get();
+        $unidades = Unidade::all();
+
+        return view('app.produto_detalhe.create', ['titulo' => 'Atualizar Detalhes do Produto','button' => 'Atualizar', 'classe' => 'borda-preta', 'acao' => 'produto-detalhe.update', 'produtos' => $produtos, 'unidades' => $unidades, 'produtoDetalhe' => $produtoDetalhe]);
     }
 
     /**
