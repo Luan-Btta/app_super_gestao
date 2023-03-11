@@ -78,7 +78,9 @@ class ProdutoDetalheController extends Controller
      */
     public function update(Request $request, ProdutoDetalhe $produtoDetalhe)
     {
-        //
+        $produtoDetalhe->update($request->all());
+
+        echo "Atualização realizada com sucesso!";
     }
 
     /**

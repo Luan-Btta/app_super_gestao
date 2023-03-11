@@ -6,6 +6,7 @@ use App\Models\Produto;
 use Illuminate\Http\Request;
 use Ramsey\Collection\Collection;
 use App\Models\Unidade;
+use App\Models\ProdutoDetalhe;
 
 class ProdutoController extends Controller
 {
@@ -20,6 +21,18 @@ class ProdutoController extends Controller
         $produtos = Produto::simplePaginate(10);
         $unidades = Unidade::all();
 
+        foreach($produtos as $chave => $produto){
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+
+            if(isset($produtoDetalhe)){
+                print_r($produtoDetalhe->getAttributes());
+
+                $produtos[$chave]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$chave]['largura'] = $produtoDetalhe->largura;
+                $produtos[$chave]['altura'] = $produtoDetalhe->altura;
+            }
+        }
+        echo '<hr>';
         //dd($produtos);
 
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all(), 'titulo' => 'Produtos - Listar', 'unidades' => $unidades]);
