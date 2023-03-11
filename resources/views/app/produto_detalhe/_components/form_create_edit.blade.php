@@ -13,7 +13,7 @@
         <option value="">Selecione o produto referenciado</option>
         @foreach ($produtos as $produto)
             <option value="{{ $produto->id }}"
-                {{ (isset($produtoDetalhe) && $produtoDetalhe->produto_id == $produto->id) || $produto->id == old('produto_id') ? 'Selected' : '' }}>
+                {{ (isset($produtoDetalhe->id) && $produtoDetalhe->produto_id == $produto->id) || $produto->id == old('produto_id') ? 'Selected' : '' }}>
                 {{ $produto->nome }}</option>
         @endforeach
     </select>
