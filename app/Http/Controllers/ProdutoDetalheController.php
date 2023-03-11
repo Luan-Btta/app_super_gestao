@@ -41,7 +41,7 @@ class ProdutoDetalheController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ProdutoDetalhe::create($request->all());
     }
 
     /**
