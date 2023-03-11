@@ -43,9 +43,9 @@
                                         {{ $produto->unidade_id === $unidade->id ? $unidade->descricao : '' }}
                                     @endforeach
                                 </td>
-                                <td>{{ $produto->comprimento ?? '0' }} cm</td>
-                                <td>{{ $produto->largura ?? '0' }} cm</td>
-                                <td>{{ $produto->altura ?? '0' }} cm</td>
+                                <td>{{ $produto->produtoDetalhe->comprimento ?? '0' }} cm</td>
+                                <td>{{ $produto->produtoDetalhe->largura ?? '0' }} cm</td>
+                                <td>{{ $produto->produtoDetalhe->altura ?? '0' }} cm</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td>
                                     <form id="form_{{ $produto->id }}" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}" method="POST">
