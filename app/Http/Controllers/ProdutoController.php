@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Ramsey\Collection\Collection;
 use App\Models\Unidade;
 use App\Models\ProdutoDetalhe;
+use App\Models\Fornecedor;
 
 class ProdutoController extends Controller
 {
@@ -47,9 +48,9 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        //dd($unidades);
+        $fornecedores = Fornecedor::all();
 
-        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => 'produto.store', 'button' => 'Cadastrar', 'classe' => 'borda-preta', 'unidades' => $unidades]);
+        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => 'produto.store', 'button' => 'Cadastrar', 'classe' => 'borda-preta', 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -102,9 +103,10 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
+        $fornecedores = Fornecedor::all();
         //dd($unidades);
 
-        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => "produto.update", 'button' => 'Atualizar', 'classe' => 'borda-preta', 'unidades' => $unidades, 'produto' => $produto, 'metodo' => 'PUT']);
+        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => "produto.update", 'button' => 'Atualizar', 'classe' => 'borda-preta', 'unidades' => $unidades, 'produto' => $produto, 'metodo' => 'PUT', 'fornecedores' => $fornecedores]);
     }
 
     /**

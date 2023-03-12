@@ -13,6 +13,14 @@
         {{$errors->has('nome') ? $errors->first('nome') : ''}}
         <input type="text" name="descricao" value="{{ $produto->descricao ?? old('descricao') }}" placeholder="Descrição" class="{{ $classe }}">
         {{$errors->has('descricao') ? $errors->first('descricao') : ''}}
+
+        <select name="fornecedor_id">
+            <option value="">Selecione o Fornecedor deste Produto</option>
+            @foreach ($fornecedores as $fornecedor)
+                <option value="{{ $fornecedor->id }}" {{ (isset($produto->fornecedor_id) && $produto->fornecedor_id === $fornecedor->id) || (old('fornecedor_id') == $fornecedor->id) ? 'Selected' : '' }}>{{ $fornecedor->nome }}</option>
+            @endforeach
+        </select>
+
         <input type="number" name="peso" value="{{ $produto->peso ?? old('peso') }}" min="1" max="999" placeholder="Peso em KG" class="{{ $classe }}">
         {{$errors->has('peso') ? $errors->first('peso') : ''}}
         <select name="unidade_id">
