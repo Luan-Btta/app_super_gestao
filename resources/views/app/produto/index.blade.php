@@ -33,6 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{-- @dd($produtos) --}}
                         @foreach ($produtos as $produto)
                             <tr>
                                 <td>{{ $produto->nome }}</td>

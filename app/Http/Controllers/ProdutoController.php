@@ -17,8 +17,8 @@ class ProdutoController extends Controller
      */
     public function index(Request $request, $msg = '')
     {
-        //
-        $produtos = Produto::simplePaginate(10);
+        //$produtos = Produto::simplePaginate(10); LAZY LOADING
+        $produtos = Produto::with('ProdutoDetalhe')->Paginate(10); //EAGER LOADING WITH('MÉTODOS DO MODEL')
         $unidades = Unidade::all();
 
         /*

@@ -63,6 +63,7 @@ class ProdutoDetalheController extends Controller
      */
     public function edit(ProdutoDetalhe $produtoDetalhe)
     {
+        $produtoDetalhe = $produtoDetalhe->with('Produto')->find($produtoDetalhe->id); //EAGER LOADING
         $produtos = Produto::orderBy('nome')->get();
         $unidades = Unidade::all();
 
