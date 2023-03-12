@@ -14,11 +14,11 @@ class FornecedorController extends Controller
 
     public function listar(Request $request, $msg = ''){
         
-        $fornecedores = Fornecedor::
+        $fornecedores = Fornecedor::with('produtos')->
             where('nome', 'like', '%' . $request->input('nome') . '%')      
             ->where('site', 'like', '%' . $request->input('site') . '%')
             ->where('uf', 'like', '%' . $request->input('uf') . '%')
-            ->where('email', 'like', '%' . $request->input('email') . '%')->paginate(3); //->simplePaginate(3);
+            ->where('email', 'like', '%' . $request->input('email') . '%')->paginate(6); //->simplePaginate(3);
 
         //dd($fornecedores);
 
