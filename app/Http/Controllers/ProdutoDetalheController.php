@@ -29,7 +29,6 @@ class ProdutoDetalheController extends Controller
         $produtos = Produto::orderBy('nome')->get();
         $unidades = Unidade::all();
 
-
         return view('app.produto_detalhe.create', ['titulo' => 'Adicionar Detalhes ao Produto','button' => 'Adicionar', 'classe' => 'borda-preta', 'acao' => 'produto-detalhe.store', 'produtos' => $produtos, 'unidades' => $unidades]);
     }
 

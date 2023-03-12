@@ -13,11 +13,11 @@
         <option value="">Selecione o produto referenciado</option>
         @foreach ($produtos as $produto)
             <option value="{{ $produto->id }}"
-                {{ (isset($produtoDetalhe->produto->id) && $produtoDetalhe->produto->id == $produto->id) || $produtoDetalhe->produto->id == old('produto_id') ? 'Selected' : '' }}>
+                {{ (isset($produtoDetalhe->produto) && $produtoDetalhe->produto->id == $produto->id) || $produto->id == old('produto_id') ? 'Selected' : '' }}>
                 {{ $produto->nome }}</option>
         @endforeach
     </select>
-    <span>{{ $produtoDetalhe->produto->descricao }}</span>
+    <span>{{ isset($produtoDetalhe->produto) ? $produtoDetalhe?->produto->descricao : '' }}</span>
     {{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}
 
     <input type="text" name="comprimento" value="{{ $produtoDetalhe->comprimento ?? old('comprimento') }}"
