@@ -22,6 +22,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
+                            <th>Fornecedor</th>
                             <th>Peso</th>
                             <th>UN</th>
                             <th>Comprimento</th>
@@ -38,6 +39,7 @@
                             <tr>
                                 <td>{{ $produto->nome }}</td>
                                 <td>{{ $produto->descricao }}</td>
+                                <td>{{ $produto->fornecedor->nome }}</td>
                                 <td>{{ $produto->peso }}KG</td>
                                 <td>
                                     @foreach ($unidades as $unidade)

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProdutoDetalhe;
+use App\Models\Fornecedor;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Produto extends Model
@@ -17,8 +18,13 @@ class Produto extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function ProdutoDetalhe(): HasOne
+    public function produtoDetalhe(): HasOne
     {
         return $this->hasOne(ProdutoDetalhe::class, 'produto_id', 'id');
+    }
+
+    public function fornecedor()
+    {
+        return $this->belongsTo(Fornecedor::class, 'fornecedor_id', 'id');
     }
 }

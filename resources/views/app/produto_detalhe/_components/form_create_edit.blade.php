@@ -7,7 +7,6 @@
     @endif
     @csrf
     @if (isset($produtoDetalhe->id) && $produtoDetalhe->id != '')
-    {{ $produtoDetalhe->toJson() }}
         <input type="hidden" name="id" value="{{ $produtoDetalhe->id }}">
     @endif
     <select name="produto_id">
