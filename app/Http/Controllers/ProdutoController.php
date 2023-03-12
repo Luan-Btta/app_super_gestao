@@ -108,7 +108,7 @@ class ProdutoController extends Controller
         $fornecedores = Fornecedor::all();
         //dd($unidades);
 
-        return view('app.produto.create', ['titulo' => 'Produtos - Adicionar', 'acao' => "produto.update", 'button' => 'Atualizar', 'classe' => 'borda-preta', 'unidades' => $unidades, 'produto' => $produto, 'metodo' => 'PUT', 'fornecedores' => $fornecedores]);
+        return view('app.produto.create', ['titulo' => 'Produtos - Editar', 'acao' => "produto.update", 'button' => 'Atualizar', 'classe' => 'borda-preta', 'unidades' => $unidades, 'produto' => $produto, 'metodo' => 'PUT', 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -124,13 +124,15 @@ class ProdutoController extends Controller
             'nome' => 'required|',
             'descricao' => 'required',
             'peso' => 'required|integer',
-            'unidade_id' => 'required|exists:unidades,id'
+            'unidade_id' => 'required|exists:unidades,id',
+            'fornecedor_id' => 'required|exists:fornecedores,id'
         ];
         $retornos = [
             'required' => 'O campo :attribute é obrigatório',
             'unidade_id.required' => 'O campo unidade é obrigatorio',
             'integer' => 'O campo :attribute deve conter somente números',
-            'unidade_id.exists' => 'Unidade inválida'
+            'unidade_id.exists' => 'Unidade inválida',
+            'fornecedor_id.exists' => 'Fornecedor inválido'
         ];
         
         $request->validate($regras, $retornos);
