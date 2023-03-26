@@ -9,13 +9,13 @@
         </div>
         <div class="menu">
             <ul>
-                <li><a href="{{ route('cliente.index') }}">Voltar</a></li>
-                <li><a href="{{ route('cliente.create') }}">Consulta</a></li>
+                <li><a href="{{ route('pedido.index') }}">Voltar</a></li>
+                <li><a href="{{ route('pedido.create') }}">Consulta</a></li>
 
             </ul>
         </div>
         <div class="informacao-pagina">
-            @component('app.cliente._components.form_cliente', ['button' => $button, 'classe' => $classe, 'cliente' => isset($cliente) ? $cliente : '', 'acao' => $acao])
+            @component('app.pedido._components.form_pedido', ['button' => $button, 'classe' => $classe, 'pedido' => isset($pedido) ? $pedido : '', 'acao' => $acao, 'clientes' => $clientes])
             @endcomponent
         </div>
     </div>

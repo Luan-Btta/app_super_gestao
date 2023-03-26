@@ -29,11 +29,11 @@ return new class extends Migration
 
         Schema::create('pedidos_produtos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cliente_id');
+            $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('produto_id');     
             $table->timestamps();
 
-            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->foreign('pedido_id')->references('id')->on('pedidos');
             $table->foreign('produto_id')->references('id')->on('produtos');
 
         });

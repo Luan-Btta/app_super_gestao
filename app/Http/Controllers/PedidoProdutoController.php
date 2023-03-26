@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pedido;
+use App\Models\PedidoProduto;
+use App\Models\Produto;
+
 
 class PedidoProdutoController extends Controller
 {
@@ -17,13 +21,17 @@ class PedidoProdutoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for editing the specified resource.
      *
+     * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Pedido $pedido)
     {
-        //
+        $produtos = Produto::all();
+        //$pedido->produtos;
+
+        return view('app.pedido_produto.create', ['titulo' => 'Adicionar Produtos ao Pedido', 'acao' => 'pedido-produto.store', 'button' => 'Adicionar', 'classe' => 'borda-preta', 'pedido' => $pedido, 'produtos' => $produtos]);
     }
 
     /**
@@ -32,9 +40,33 @@ class PedidoProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request, Pedido $pedido)
+    {  
+        $produtos = Produto::all();
+
+        $regras = [
+            'produto_id' => 'required|exists:produtos,id'
+        ];
+
+        $feedback = [
+            'required' => 'Este campo é obrigatório',
+            'exists' => 'Campo inválido, tente novamente'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        PedidoProduto::create(['pedido_id' => $pedido->id, 'produto_id' => $request->get('produto_id')]);
+
+        return redirect()->route('pedido-produto.create', ['titulo' => 'Adicionar Produtos ao Pedido', 'acao' => 'pedido-produto.store', 'button' => 'Adicionar', 'classe' => 'borda-preta', 'pedido' => $pedido, 'produtos' => $produtos]);
+
+        /*
+        echo '<pre>';
+        print_r($pedido->id);
+        echo '</pre>';
+        echo '<hr>';
+        echo '<pre>';
+        print_r($request->get('produto_id'));
+        echo '</pre>';*/
     }
 
     /**
