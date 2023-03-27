@@ -21,6 +21,9 @@ class Pedido extends Model
             2- É A TABELA AUXILIAR QUE ARMAZENA OS REGISTROS DE RELACIONAMENTO
             3- REPRESENTA O NOME DA FK DA TABELA MAPEADA PELO MODELO NA TABELA DE RELACIONAMENTO
             4- REPRESENTA O NOME DA FK DA TABELA MAPEADA PELO MODEL UTILIZADO NO RELACIONAMENTO QUE ESTAMOS IMPLEMENTANDO
+
+            
+            return $this->belongsToMany(Produto::class, 'pedidos_produtos')->withPivot('created_at', 'updated_at);
         */
     }
 }

@@ -13,6 +13,10 @@
             @endforeach
         </select>
         {{$errors->has('produto_id') ? $errors->first('produto_id') : ''}}
+
+        <input type="number" min="1" max="99" name="quantidade" placeholder="Insira a quantidade de itens para adicionar" required>
+        {{$errors->has('quantidade') ? $errors->first('quantidade') : ''}}
+
         <button type="submit">{{ $button }}</button>
     </form>
 </div>

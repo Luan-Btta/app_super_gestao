@@ -59,6 +59,22 @@
                                 </td>
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                             </tr>
+                            <tr>
+                                <td colspan='11'>
+                                    <p>Pedidos</p>
+                                    @php $contador = [] @endphp
+                                    @foreach ($produto->pedidos as $pedido)
+                                        @if(in_array($pedido->id, $contador))
+                                            @continue;
+                                        @endif
+                                        Pedido: <a href="{{route('pedido-produto.create', ['pedido' => $pedido->id]) }}">{{ $pedido->id }}</a>
+                                        @php $contador[] = $pedido->id @endphp
+                                    @endforeach
+                                    @if ($contador === [])
+                                        <p>Não há pedidos desse item</p>
+                                    @endif
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

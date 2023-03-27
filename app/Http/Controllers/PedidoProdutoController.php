@@ -45,7 +45,8 @@ class PedidoProdutoController extends Controller
         $produtos = Produto::all();
 
         $regras = [
-            'produto_id' => 'required|exists:produtos,id'
+            'produto_id' => 'required|exists:produtos,id',
+            'quantidade' => 'required'
         ];
 
         $feedback = [
@@ -55,7 +56,13 @@ class PedidoProdutoController extends Controller
 
         $request->validate($regras, $feedback);
 
-        PedidoProduto::create(['pedido_id' => $pedido->id, 'produto_id' => $request->get('produto_id')]);
+        //PedidoProduto::create(['pedido_id' => $pedido->id, 'produto_id' => $request->get('produto_id')]);
+
+        //$pedido->produtos()->attach($request->get('produto_id'), ['quantidade' => $request->get('quantidade')]);
+
+        $pedido->produtos()->attach([
+            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+        ]);
 
         return redirect()->route('pedido-produto.create', ['titulo' => 'Adicionar Produtos ao Pedido', 'acao' => 'pedido-produto.store', 'button' => 'Adicionar', 'classe' => 'borda-preta', 'pedido' => $pedido, 'produtos' => $produtos]);
 
