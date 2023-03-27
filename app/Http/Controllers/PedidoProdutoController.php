@@ -116,8 +116,13 @@ class PedidoProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pedido $pedido, Produto $produto)
     {
-        //
+        //CONVENCIONAL
+        // PedidoProduto::where(['pedido_id' => $pedido->id, 'produto_id' => $produto->id])->delete();
+
+        //DETACH
+        $pedido->produtos()->detach($produto->id);
+        //PRODUTO_ID JÁ ESTÁ DISPONÍVEL NO OBJETO INSTANCIADO
     }
 }

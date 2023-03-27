@@ -25,6 +25,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>QTD</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,13 @@
                         <td>{{ $produto->id }}</td>
                         <td>{{ $produto->nome }}</td>
                         <td>{{ $quantidade }}</td>
+                        <td>
+                            <form id="form_{{$pedido->id}}_{{$produto->id}}" method="POST" action="{{ route('pedido-produto.destroy', ['pedido' => $pedido->id, 'produto' => $produto->id])}}">
+                                @method('DELETE')
+                                @csrf
+                            </form>  
+                            <a href="#" onclick="document.getElementById('form_{{$pedido->id}}_{{$produto->id}}').submit()">Excluir</a>                          
+                        </td>
                     </tr>
                     @php
                         $quantidade > 1 ? $produto_quantidade[] = $produto->id : '';                    
