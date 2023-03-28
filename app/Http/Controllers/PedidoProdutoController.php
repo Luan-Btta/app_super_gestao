@@ -116,13 +116,16 @@ class PedidoProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido, Produto $produto)
+    public function destroy(PedidoProduto $pedidoProduto, Pedido $pedido)
     {
+        $produtos = Produto::all();
         //CONVENCIONAL
         // PedidoProduto::where(['pedido_id' => $pedido->id, 'produto_id' => $produto->id])->delete();
 
         //DETACH
-        $pedido->produtos()->detach($produto->id);
+        $pedidoProduto->delete();
         //PRODUTO_ID JÁ ESTÁ DISPONÍVEL NO OBJETO INSTANCIADO
+
+        return view('app.pedido_produto.create', ['titulo' => 'Adicionar Produtos ao Pedido', 'acao' => 'pedido-produto.store', 'button' => 'Adicionar', 'classe' => 'borda-preta', 'pedido' => $pedido, 'produtos' => $produtos]);
     }
 }

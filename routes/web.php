@@ -63,7 +63,7 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
     
     Route::post('pedido-produto/store/{pedido}', 'App\Http\Controllers\PedidoProdutoController@store')->name('pedido-produto.store');
 
-    Route::delete('pedido-produto/destroy/{pedido}/{produto}', 'App\Http\Controllers\PedidoProdutoController@destroy')->name('pedido-produto.destroy');
+    Route::delete('pedido-produto/destroy/{pedidoProduto}/{pedido}', 'App\Http\Controllers\PedidoProdutoController@destroy')->name('pedido-produto.destroy');
 
 });
 

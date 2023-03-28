@@ -43,11 +43,11 @@
                         <td>{{ $produto->nome }}</td>
                         <td>{{ $quantidade }}</td>
                         <td>
-                            <form id="form_{{$pedido->id}}_{{$produto->id}}" method="POST" action="{{ route('pedido-produto.destroy', ['pedido' => $pedido->id, 'produto' => $produto->id])}}">
+                            <form id="form_{{$produto->pivot->id}}" method="POST" action="{{ route('pedido-produto.destroy', ['pedidoProduto' => $produto->pivot->id, 'pedido' => $pedido->id])}}">
                                 @method('DELETE')
                                 @csrf
                             </form>  
-                            <a href="#" onclick="document.getElementById('form_{{$pedido->id}}_{{$produto->id}}').submit()">Excluir</a>                          
+                            <a href="#" onclick="document.getElementById('form_{{$produto->pivot->id}}').submit()">Excluir</a>                          
                         </td>
                     </tr>
                     @php
